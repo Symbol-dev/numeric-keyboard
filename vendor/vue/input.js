@@ -85,7 +85,10 @@ export const NumericInput = Vue.extend({
     }
 
     return (
-      <div class={className} vOn:touchend={this.onFocus.bind(this)}>
+      <div class={className}
+           vOn:touchend={this.onFocus.bind(this)}
+           vOn:click={this.onFocus.bind(this)}
+      >
         <div>
           <div class="numeric-input-text">{this.ks.rawValue.map((c, i) => <span key={i} data-index={i}>{c}</span>)}</div>
           {this.ks.rawValue.length === 0 && <div class="numeric-input-placeholder">{this.kp.placeholder}</div>}
