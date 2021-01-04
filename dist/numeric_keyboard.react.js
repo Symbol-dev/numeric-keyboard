@@ -2870,6 +2870,9 @@ var Mixins = {
     elContainer.className = 'numeric-keyboard-actionsheet';
     elContainer.appendChild(elShadow);
     elContainer.appendChild(elKeyboard);
+    var elKeyboardSpace = document.createElement('div');
+    elKeyboardSpace.style.height = '36vh';
+    document.body.appendChild(elKeyboardSpace);
     document.body.appendChild(elContainer);
     this.createKeyboard(elKeyboard, {
       layout: this.kp.layout || this.kp.type,
@@ -2883,10 +2886,19 @@ var Mixins = {
       elKeyboard.style.transform = "translateY(".concat((frames - frame) / frames * 100, "%)");
     }, function () {}, 10);
     this.set('keyboardElement', elKeyboard);
+    this.set('keyboardSpaceElement', elKeyboardSpace);
     this.set('cursorActive', true);
     this.set('cursorPos', this.ks.rawValue.length);
     this.dispatch('focus');
     KeyboardCenter.register(this);
+    var body = document.body;
+    var html = document.documentElement;
+    var height = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
+    var keyboardAreaHeight = height * 0.36;
+    window.scroll({
+      top: height - keyboardAreaHeight,
+      behavior: 'smooth'
+    });
   },
   closeKeyboard: function closeKeyboard() {
     var _this4 = this;
@@ -2897,6 +2909,7 @@ var Mixins = {
 
     var keyboard = this.ks.keyboard;
     var elKeyboard = this.ks.keyboardElement;
+    var elKeyboardSpace = this.ks.keyboardSpaceElement;
     Object(_utils_animate_js__WEBPACK_IMPORTED_MODULE_4__["animate"])(function (timestamp, frame, frames) {
       elKeyboard.style.transform = "translateY(".concat(frame / frames * 100, "%)");
     }, function () {
@@ -2904,8 +2917,13 @@ var Mixins = {
         _this4.destroyKeyboard(elKeyboard, keyboard);
 
         document.body.removeChild(elKeyboard.parentNode);
+        document.body.removeChild(elKeyboardSpace);
       }, 300);
     }, 10);
+    window.scroll({
+      top: 0,
+      behavior: 'smooth'
+    });
     this.set('keyboard', null);
     this.set('keyboardElement', null);
     this.set('cursorActive', false);
