@@ -50,7 +50,6 @@ export const NumericKeyboard = Vue.extend({
                   data-key={c.key}
                   data-icon={c.key === ENTER ? this.kp.entertext : c.key}
                   class="numeric-keyboard-key"
-                  vOn:touchend={e => this.onTouchend(c.key, e)}
                   vOn:click={e => this.onTouchend(c.key, e)}
                 >
                 </td>

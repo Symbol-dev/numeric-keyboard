@@ -224,9 +224,6 @@ var NumericKeyboard = vue__WEBPACK_IMPORTED_MODULE_1___default.a.extend({
           },
           "class": "numeric-keyboard-key",
           "on": {
-            "touchend": function touchend(e) {
-              return _this.onTouchend(c.key, e);
-            },
             "click": function click(e) {
               return _this.onTouchend(c.key, e);
             }
@@ -2386,7 +2383,6 @@ var NumericInput = vue__WEBPACK_IMPORTED_MODULE_3___default.a.extend({
     return h("div", {
       "class": className,
       "on": {
-        "touchend": this.onFocus.bind(this),
         "click": this.onFocus.bind(this)
       }
     }, [h("div", [h("div", {

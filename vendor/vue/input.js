@@ -86,7 +86,6 @@ export const NumericInput = Vue.extend({
 
     return (
       <div class={className}
-           vOn:touchend={this.onFocus.bind(this)}
            vOn:click={this.onFocus.bind(this)}
       >
         <div>
